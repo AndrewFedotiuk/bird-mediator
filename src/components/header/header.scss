@@ -1,0 +1,13 @@
+@import "../../vars";
+
+.header{
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+	background-color: $grey;
+	&__box{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+}
