@@ -5,6 +5,7 @@
 	justify-content: space-between;
 	padding: 10px 20px;
 	background-color: $grey;
+	border-bottom: 3px solid white;
 	&__box{
 		display: flex;
 		flex-direction: column;
