@@ -1,26 +1,28 @@
 import React, {Component} from 'react';
-import Konva from 'konva';
-import {Stage, Layer, Star, Image} from 'react-konva';
-import useImage from 'use-image';
+import {Stage, Layer, Rect} from 'react-konva';
+import PlaceholderImage from '../placeholder-image';
 
-
-const CanvasImage = ({src}) => {
-	const [image] = useImage(src);
-	return <Image image={image} />;
-};
 
 class Editor extends Component {
-	state = {
-		width: 1200,
-		height: 768,
-	};
-
 	render() {
+		const [width, height] = this.props.size.split('x');
+		const rectSize = 220;
 
 		return (
-			<Stage width={this.state.width} height={this.state.height} className='editor'>
+			<Stage width={+width} height={+height} className='editor'>
 				<Layer>
-					<CanvasImage src={`https://via.placeholder.com/${this.state.width}x${this.state.height}/2d2d2d/fff`} />
+					<PlaceholderImage size={this.props.size} />
+				</Layer>
+
+				<Layer>
+					<Rect
+						x={0}
+						y={height-rectSize/2}
+						width={rectSize}
+						height={rectSize}
+						fill="red"
+						rotation={45}
+					/>
 				</Layer>
 			</Stage>
 		)

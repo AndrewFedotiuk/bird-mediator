@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 
-const Header = ()=>{
+const Header = ({changeSizeHandler})=>{
 
 	return(
 		<header className='header'>
@@ -19,9 +19,9 @@ const Header = ()=>{
 
 			<div className="header__box">
 				<label htmlFor='selectFormat'>Выберите формат</label>
-				<select name="selectFormat" id="selectFormat">
-					<option value="630">Facebook</option>
-					<option value="563">Vk</option>
+				<select name="selectFormat" id="selectFormat" onChange={changeSizeHandler}>
+					<option value="1200x768">Facebook</option>
+					<option value="1000x563">Vk</option>
 				</select>
 			</div>
 
