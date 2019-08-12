@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 
-const Header = ({changeSizeHandler})=>{
+const Header = ({changeSizeHandler, setImageHandlerFromFile})=>{
 
 	return(
 		<header className='header'>
@@ -9,7 +9,7 @@ const Header = ({changeSizeHandler})=>{
 
 			<div className="header__box">
 				<label htmlFor='headerInputFile'>Загрузить изображение:</label>
-				<input type="file" id='headerInputFile'/>
+				<input type="file" id='headerInputFile' onChange = {setImageHandlerFromFile}/>
 			</div>
 
 			<div className="header__box">
@@ -20,7 +20,7 @@ const Header = ({changeSizeHandler})=>{
 			<div className="header__box">
 				<label htmlFor='selectFormat'>Выберите формат</label>
 				<select name="selectFormat" id="selectFormat" onChange={changeSizeHandler}>
-					<option value="1200x768">Facebook</option>
+					<option value="1200x630">Facebook</option>
 					<option value="1000x563">Vk</option>
 				</select>
 			</div>

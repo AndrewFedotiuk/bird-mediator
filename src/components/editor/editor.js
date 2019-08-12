@@ -1,32 +1,40 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Stage, Layer, Rect} from 'react-konva';
-import PlaceholderImage from '../placeholder-image';
+import imageComponent from '../imageComponent';
 
+const Editor = ({size, postImage, imageX, imageY, onDragEnd}) => {
+	const [width, height] = size.split('x');
+	const rectSize = 220;
 
-class Editor extends Component {
-	render() {
-		const [width, height] = this.props.size.split('x');
-		const rectSize = 220;
+	return (
+		<Stage width={+width} height={+height} className='editor'>
+			<Layer>
+				{
+					imageComponent(
+						postImage,
+						size,
+						+width,
+						+height,
+						imageX,
+						imageY,
+						onDragEnd
+					)
+				}
+			</Layer>
 
-		return (
-			<Stage width={+width} height={+height} className='editor'>
-				<Layer>
-					<PlaceholderImage size={this.props.size} />
-				</Layer>
+			<Layer>
+				<Rect
+					x={0}
+					y={height - rectSize / 2}
+					width={rectSize}
+					height={rectSize}
+					fill="#fa3b5a"
+					rotation={45}
+				/>
+			</Layer>
+		</Stage>
+	)
 
-				<Layer>
-					<Rect
-						x={0}
-						y={height-rectSize/2}
-						width={rectSize}
-						height={rectSize}
-						fill="red"
-						rotation={45}
-					/>
-				</Layer>
-			</Stage>
-		)
-	}
-}
+};
 
 export default Editor;

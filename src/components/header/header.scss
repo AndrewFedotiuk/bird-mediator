@@ -4,8 +4,8 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 10px 20px;
-	background-color: $grey;
-	border-bottom: 3px solid white;
+	//background-color: $grey;
+	background: linear-gradient(to bottom, #9388fc 0%,#53cbf1 100%,#077fff 100%);
 	&__box{
 		display: flex;
 		flex-direction: column;

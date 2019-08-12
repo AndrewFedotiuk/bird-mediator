@@ -7,7 +7,7 @@
 
 body{
 	font-family: 'Roboto Condensed', sans-serif;
-	background-color: $grey;
+	background-color: $black;
 }
 
 .editor{
@@ -15,4 +15,8 @@ body{
 	align-items: center;
 	justify-content: center;
 	overflow: scroll;
+	margin-top: 20px;
+	.konvajs-content{
+		border: 3px solid $white;
+	}
 }
