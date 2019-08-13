@@ -1,0 +1,21 @@
+@import "../../vars";
+
+.save-wrapper{
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	background: linear-gradient(to right, #9388fc 0%,#53cbf1 100%,#077fff 100%);
+	border-radius: 50%;
+
+	&__icon{
+		width: 50px;
+		height: 36px;
+		color: $white;
+	}
+}

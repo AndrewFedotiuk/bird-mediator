@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 10px 20px;
-	background: linear-gradient(to right, #9388fc 0%,#53cbf1 100%,#077fff 100%);
+	background: $gradient;
 	&__box{
 		display: flex;
 		flex-direction: column;

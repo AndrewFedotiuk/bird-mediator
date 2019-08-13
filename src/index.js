@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/header';
 import Editor from './components/editor';
-import {toBase64} from './utils';
+import SaveImage from './components/save-image';
+// import SaveImagePopup from './components/save-image-popup';
+import {toBase64, downloadURI} from './utils';
 import './index.scss';
 
 class App extends Component {
@@ -11,8 +13,11 @@ class App extends Component {
 		postImage: null,
 		imageX: 0,
 		imageY: 0,
-		rectColor: '#fa3b5a'
+		rectColor: '#fa3b5a',
+		imageData: null
 	};
+
+	imageData = null;
 
 	changeSizeHandler = (event) => {
 		event.persist();
@@ -31,16 +36,11 @@ class App extends Component {
 			const image = new Image();
 			image.src = await toBase64(file);
 			image.onload = () => {
-				const imageObj = {
-					image: image,
-					width: image.width,
-					height: image.height,
-				};
 				this.setState({
 					...this.state,
 					imageX: 0,
 					imageY: 0,
-					postImage: imageObj
+					postImage: image
 				});
 
 			};
@@ -51,7 +51,7 @@ class App extends Component {
 
 	};
 
-	onDragEnd = (e)=>{
+	onDragEnd = (e) => {
 		this.setState({
 			...this.state,
 			imageX: e.target.x(),
@@ -59,14 +59,45 @@ class App extends Component {
 		})
 	};
 
-	setColor=(e)=>{
+	setColor = (e) => {
 		e.persist();
-		if(e.currentTarget.value.startsWith('#')){
+		if (e.currentTarget.value.startsWith('#')) {
 			this.setState({
 				...this.state,
 				rectColor: e.currentTarget.value
 			})
 		}
+	};
+
+	// showPopup = () => {
+	// 	this.setState((prevState) => {
+	// 		return {
+	// 			...prevState,
+	// 			popup: !prevState.popup
+	// 		}
+	// 	})
+	// };
+
+	saveImage = (type) => {
+		const dataURL = this.imageData.toDataURL({pixelRatio: 1});
+		downloadURI(dataURL, 'postImage');
+
+
+		// switch (type) {
+		// 	case '1': {
+		// 		downloadURI(dataURL, 'postImage');
+		// 		break;
+		// 	}
+		// 	default:
+		// 		console.log('data');
+		//
+		// }
+	};
+
+
+
+	uploadImage = (node) => {
+		this.imageData = node;
 	};
 
 	render() {
@@ -86,7 +117,11 @@ class App extends Component {
 					imageX={this.state.imageX}
 					imageY={this.state.imageY}
 					onDragEnd={this.onDragEnd}
+					uploadImage={this.uploadImage}
 				/>
+
+				<SaveImage saveImage={this.saveImage}/>
+				{/*<SaveImagePopup popup={this.state.popup} saveImage={this.saveImage}/>*/}
 			</div>
 		);
 	}

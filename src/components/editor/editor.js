@@ -2,12 +2,17 @@ import React from 'react';
 import {Stage, Layer, Rect} from 'react-konva';
 import imageComponent from '../imageComponent';
 
-const Editor = ({size, postImage, imageX, imageY, onDragEnd, rectColor}) => {
+const Editor = ({size, postImage, imageX, imageY, onDragEnd, rectColor, uploadImage}) => {
 	const [width, height] = size.split('x').map(s => Number(s));
 	const rectSize = 220;
 
 	return (
-		<Stage width={width} height={height} className='editor'>
+		<Stage
+			width={width}
+			height={height}
+			className='editor'
+			ref={uploadImage}
+		>
 			<Layer>
 				{
 					imageComponent(

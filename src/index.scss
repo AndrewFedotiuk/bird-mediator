@@ -8,6 +8,12 @@
 .d-flex{
 	display: flex;
 }
+.d-block{
+	display: block;
+}
+.d-none{
+	display: none;
+}
 
 body{
 	font-family: 'Roboto Condensed', sans-serif;
@@ -15,7 +21,8 @@ body{
 }
 
 .App{
-	min-width: 1300px;
+	position: relative;
+	//min-width: 1300px;
 }
 
 .editor{

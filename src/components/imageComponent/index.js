@@ -18,7 +18,7 @@ const imageComponent = (file, size, width, height, imageX, imageY, onDragEnd) =>
 		return <Image
 			x={imageX}
 			y={imageY}
-			image={file.image}
+			image={file}
 			width={imageWidth}
 			height={imageHeight}
 			draggable

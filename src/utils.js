@@ -5,6 +5,18 @@ const toBase64 = (file) => new Promise((resolve, reject) => {
 	reader.onerror = error => reject(error);
 });
 
+const downloadURI = (uri, name) => {
+	const link = document.createElement('a');
+	link.style = "display: none";
+	link.download = name;
+	link.href = uri;
+	document.body.appendChild(link);
+	link.click();
+	window.URL.revokeObjectURL(link);
+	document.body.removeChild(link);
+};
+
 export{
 	toBase64,
+	downloadURI
 }

@@ -1,0 +1,31 @@
+@import "../../vars";
+
+.save-image-popup{
+	position: absolute;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 150px;
+	background: $gradient;
+	padding: 20px;
+	border-radius: 25px;
+
+	transform: translate(-50%, -50%);
+
+	button{
+		height: 50px;
+		font-size: .9rem;
+		padding: 10px 20px;
+		border-radius: 50px;
+		background: $gradient;
+		color: $white;
+		transition: opacity,background-color 1s;
+		&:hover,&:active{
+			box-shadow: inset 1px 10px 20px 0px rgba(0,0,0,0.27);
+		}
+	}
+}
