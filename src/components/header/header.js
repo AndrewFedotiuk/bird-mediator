@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 
-const Header = ({changeSizeHandler, setImageHandlerFromFile})=>{
+const Header = ({changeSizeHandler, setImageHandlerFromFile, setColor, rectColor})=>{
 
 	return(
 		<header className='header'>
@@ -26,8 +26,11 @@ const Header = ({changeSizeHandler, setImageHandlerFromFile})=>{
 			</div>
 
 			<div className="header__box">
-				<label htmlFor='selectColor'>Выберите цвет ярлыка</label>
-				<input type="color" id='headerInputColor'/>
+				<label htmlFor='headerInputColor'>Выберите цвет ярлыка</label>
+				<div className='d-flex'>
+					<input type="color" id='headerInputColor' onChange={setColor} value={rectColor}/>
+					<input type="text" onChange={setColor} value={rectColor}/>
+				</div>
 			</div>
 		</header>
 	)

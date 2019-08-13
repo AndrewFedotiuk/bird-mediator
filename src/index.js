@@ -10,7 +10,8 @@ class App extends Component {
 		size: '1200x630',
 		postImage: null,
 		imageX: 0,
-		imageY: 0
+		imageY: 0,
+		rectColor: '#fa3b5a'
 	};
 
 	changeSizeHandler = (event) => {
@@ -26,7 +27,7 @@ class App extends Component {
 		e.persist();
 		const file = e.target.files[0];
 
-		if (file.type.match('image.*')) {
+		if (file && file.type.match('image.*')) {
 			const image = new Image();
 			image.src = await toBase64(file);
 			image.onload = () => {
@@ -44,9 +45,6 @@ class App extends Component {
 
 			};
 
-
-
-
 		} else {
 			alert("File mast be image!");
 		}
@@ -61,16 +59,29 @@ class App extends Component {
 		})
 	};
 
+	setColor=(e)=>{
+		e.persist();
+		if(e.currentTarget.value.startsWith('#')){
+			this.setState({
+				...this.state,
+				rectColor: e.currentTarget.value
+			})
+		}
+	};
+
 	render() {
 		return (
 			<div className="App">
 				<Header
 					changeSizeHandler={this.changeSizeHandler}
 					setImageHandlerFromFile={this.setImageHandlerFromFile}
+					setColor={this.setColor}
+					rectColor={this.state.rectColor}
 				/>
 
 				<Editor
 					size={this.state.size}
+					rectColor={this.state.rectColor}
 					postImage={this.state.postImage}
 					imageX={this.state.imageX}
 					imageY={this.state.imageY}

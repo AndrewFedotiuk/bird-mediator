@@ -6,26 +6,25 @@ const imageComponent = (file, size, width, height, imageX, imageY, onDragEnd) =>
 	if (file) {
 		const sizeHandler = (imageWidth, imageHeight, width, height) => {
 			const [wCoef, hCoef] = [width / imageWidth, height / imageHeight];
-			const condition = imageWidth >= imageHeight;
+			const absCof = wCoef > hCoef ? wCoef : hCoef;
 
 			return {
-				imageWidth: condition ? imageWidth * hCoef : width,
-				imageHeight: condition ? height : imageHeight * wCoef,
-				condition
+				imageWidth: imageWidth * absCof,
+				imageHeight: imageHeight * absCof
 			}
 		};
 
-		const imageSizes = sizeHandler(file.width, file.height, width, height);
+		const {imageWidth, imageHeight} = sizeHandler(file.width, file.height, width, height);
 		return <Image
 			x={imageX}
 			y={imageY}
 			image={file.image}
-			width={imageSizes.imageWidth}
-			height={imageSizes.imageHeight}
+			width={imageWidth}
+			height={imageHeight}
 			draggable
 			onDragEnd={onDragEnd}
 			dragBoundFunc={(pos) => {
-				return imageSizes.condition ? {x: pos.x, y: 0} : {x: 0, y: pos.y}
+				return imageWidth >= imageHeight ? {x: pos.x, y: 0} : {x: 0, y: pos.y}
 			}}
 		/>;
 

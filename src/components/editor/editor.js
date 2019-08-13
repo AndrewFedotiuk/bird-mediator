@@ -2,19 +2,19 @@ import React from 'react';
 import {Stage, Layer, Rect} from 'react-konva';
 import imageComponent from '../imageComponent';
 
-const Editor = ({size, postImage, imageX, imageY, onDragEnd}) => {
-	const [width, height] = size.split('x');
+const Editor = ({size, postImage, imageX, imageY, onDragEnd, rectColor}) => {
+	const [width, height] = size.split('x').map(s => Number(s));
 	const rectSize = 220;
 
 	return (
-		<Stage width={+width} height={+height} className='editor'>
+		<Stage width={width} height={height} className='editor'>
 			<Layer>
 				{
 					imageComponent(
 						postImage,
 						size,
-						+width,
-						+height,
+						width,
+						height,
 						imageX,
 						imageY,
 						onDragEnd
@@ -28,7 +28,7 @@ const Editor = ({size, postImage, imageX, imageY, onDragEnd}) => {
 					y={height - rectSize / 2}
 					width={rectSize}
 					height={rectSize}
-					fill="#fa3b5a"
+					fill={rectColor}
 					rotation={45}
 				/>
 			</Layer>

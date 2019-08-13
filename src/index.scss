@@ -5,9 +5,17 @@
 	padding: 0;
 }
 
+.d-flex{
+	display: flex;
+}
+
 body{
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: $black;
+}
+
+.App{
+	min-width: 1300px;
 }
 
 .editor{
