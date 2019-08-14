@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 
-const Header = ({changeSizeHandler, setImageHandlerFromFile, setColor, rectColor})=>{
+const Header = ({changeSizeHandler, setImageHandlerFromFile, setColor, rectColor, onUrlchange})=>{
 
 	return(
 		<header className='header'>
@@ -14,7 +14,7 @@ const Header = ({changeSizeHandler, setImageHandlerFromFile, setColor, rectColor
 
 			<div className="header__box">
 				<label htmlFor='headerInputUrl'>Ссылка на материал</label>
-				<input type="url" id='headerInputUrl'/>
+				<input type="url" id='headerInputUrl' placeholder='https://birdinflight.com' onKeyPress={onUrlchange}/>
 			</div>
 
 			<div className="header__box">

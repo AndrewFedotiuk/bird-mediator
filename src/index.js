@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Header from './components/header';
 import Editor from './components/editor';
 import SaveImage from './components/save-image';
-// import SaveImagePopup from './components/save-image-popup';
 import {toBase64, downloadURI} from './utils';
 import './index.scss';
 
@@ -14,7 +13,8 @@ class App extends Component {
 		imageX: 0,
 		imageY: 0,
 		rectColor: '#fa3b5a',
-		imageData: null
+		imageData: null,
+		showDownloadButton: false
 	};
 
 	imageData = null;
@@ -40,11 +40,11 @@ class App extends Component {
 					...this.state,
 					imageX: 0,
 					imageY: 0,
-					postImage: image
+					postImage: image,
+					showDownloadButton: true
 				});
-
 			};
-
+			image.crossOrigin = "Anonymous";
 		} else {
 			alert("File mast be image!");
 		}
@@ -69,35 +69,44 @@ class App extends Component {
 		}
 	};
 
-	// showPopup = () => {
-	// 	this.setState((prevState) => {
-	// 		return {
-	// 			...prevState,
-	// 			popup: !prevState.popup
-	// 		}
-	// 	})
-	// };
-
-	saveImage = (type) => {
+	saveImage = () => {
 		const dataURL = this.imageData.toDataURL({pixelRatio: 1});
 		downloadURI(dataURL, 'postImage');
-
-
-		// switch (type) {
-		// 	case '1': {
-		// 		downloadURI(dataURL, 'postImage');
-		// 		break;
-		// 	}
-		// 	default:
-		// 		console.log('data');
-		//
-		// }
 	};
-
 
 
 	uploadImage = (node) => {
 		this.imageData = node;
+	};
+
+	onUrlchange = (e) => {
+		e.persist();
+
+		if(e.key === 'Enter' && !e.currentTarget.value.startsWith('https://birdinflight.com/')){
+			alert('Неверный адрес');
+			return;
+		}
+
+		if(e.key === 'Enter'){
+			fetch(e.currentTarget.value)
+				.then((response)=> response.text())
+				.then((text)=> {
+					const doc = new DOMParser().parseFromString(text, "text/html");
+					const im = doc.querySelector('#cover-feature img.u-featured');
+					const image = new Image();
+					image.src = im.src;
+					image.onload = () => {
+						this.setState({
+							...this.state,
+							imageX: 0,
+							imageY: 0,
+							postImage: image,
+							showDownloadButton: true
+						});
+					};
+				})
+				.catch(error => alert(error));
+		}
 	};
 
 	render() {
@@ -108,6 +117,7 @@ class App extends Component {
 					setImageHandlerFromFile={this.setImageHandlerFromFile}
 					setColor={this.setColor}
 					rectColor={this.state.rectColor}
+					onUrlchange={this.onUrlchange}
 				/>
 
 				<Editor
@@ -119,9 +129,7 @@ class App extends Component {
 					onDragEnd={this.onDragEnd}
 					uploadImage={this.uploadImage}
 				/>
-
-				<SaveImage saveImage={this.saveImage}/>
-				{/*<SaveImagePopup popup={this.state.popup} saveImage={this.saveImage}/>*/}
+				<SaveImage saveImage={this.saveImage} showDownloadButton={this.state.showDownloadButton}/>
 			</div>
 		);
 	}
